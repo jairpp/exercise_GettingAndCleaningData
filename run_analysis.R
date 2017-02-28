@@ -41,7 +41,7 @@ rm(trainX,trainY,trainSubject,testX,testY,testSubject)
 
 #bind columns
 mergeddataset <- cbind(subject,Y,X)
-write.table(mergeddataset, file="mergedDataset.txt", col.names = FALSE, row.names = FALSE)
+#write.table(mergeddataset, file="mergedDataset.txt", col.names = FALSE, row.names = FALSE)
 
 # remove separated data frames
 rm(X,Y,subject)
