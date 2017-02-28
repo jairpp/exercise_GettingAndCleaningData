@@ -15,7 +15,7 @@ download.file(url, destfile= "downloadedData.zip")
 
 #Stores Dwnload date
 downloadedDataDate <- date()
-write(downloadedDataDate,file = "downloadedDataDate.txt")
+#write(downloadedDataDate,file = "downloadedDataDate.txt")
 
 #Unzips data files
 unzip("downloadedData.zip")
