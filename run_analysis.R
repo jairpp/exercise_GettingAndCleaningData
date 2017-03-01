@@ -7,15 +7,18 @@
 #   activity and each subject.
 
 #Set Working Directory
-setwd("exercise_GettingAndCleaningData")
+#setwd("exercise_GettingAndCleaningData")
 
 #Download data
-url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-download.file(url, destfile= "downloadedData.zip")
+if(!file.exists(".\\downloadedData.zip")){
+    url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+    download.file(url, destfile= "downloadedData.zip")    
+}
+
 
 #Stores Dwnload date
 downloadedDataDate <- date()
-#write(downloadedDataDate,file = "downloadedDataDate.txt")
+write(downloadedDataDate,file = "downloadedDataDate.txt")
 
 #Unzips data files
 unzip("downloadedData.zip")
@@ -35,6 +38,7 @@ testSubject <- read.table(file = "UCI HAR Dataset\\test\\subject_test.txt",col.n
 X <- rbind(trainX,testX)
 Y <- rbind(trainY,testY)
 subject <- rbind(trainSubject,testSubject)
+str(X)
 
 # remove separated data frames
 rm(trainX,trainY,trainSubject,testX,testY,testSubject)
@@ -50,7 +54,7 @@ rm(X,Y,subject)
 #####  02 Extracts only the measurements on the mean and standard deviation for each measurement.
 library(dplyr)
 tidydata <- tbl_df(mergeddataset) %>% select(subject,activity, contains("mean"), contains("std"))
-
+str(tidydata)
 
 #####  03 Uses descriptive activity names to name the activities in the data set
 activity_labels <- read.table(file = "UCI HAR Dataset\\activity_labels.txt", col.names = c("code","label"))
@@ -68,6 +72,7 @@ names(tidydata) <- tolower(gsub(x = names(tidydata), pattern = '\\.', replacemen
 
 tidyGroupedData <- group_by(tidydata, activity, subject) %>% summarise_all(mean)
 write.csv(x=tidyGroupedData,file = "tidyGroupedData.csv", row.names = FALSE)
+str(tidyGroupedData)
 
 
 
