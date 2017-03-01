@@ -71,7 +71,7 @@ names(tidydata) <- tolower(gsub(x = names(tidydata), pattern = '\\.', replacemen
 #   activity and each subject.
 
 tidyGroupedData <- group_by(tidydata, activity, subject) %>% summarise_all(mean)
-write.csv(x=tidyGroupedData,file = "tidyGroupedData.csv", row.names = FALSE)
+write.table(x=tidyGroupedData,file = "tidyGroupedData.txt", row.names = FALSE)
 str(tidyGroupedData)
 
 
